@@ -1,0 +1,1 @@
+export type { Student, CreateStudentDto, UpdateStudentDto, PrefixType } from './model/types';
