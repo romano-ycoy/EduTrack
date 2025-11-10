@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { User } from '@/entities/user';
 import type { AuthState } from '@/features/auth';
-import { refreshAccessToken } from '@/features/auth/model/useAuth';
+import { refreshAccessToken } from '@/features/auth';
 import { getAccessToken } from '@/shared/api';
 
 // 1. Define what data/function the context provides
@@ -48,13 +48,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // 4. Provide the data to all children components
     return (
         <AuthContext.Provider
-        value={{
-            user,
-            isAuthenticated: !!user,
-            isLoading,
-            setUser,
-            logout: handleLogout,
-        }}
+            value={{
+                user,
+                isAuthenticated: !!user,
+                isLoading,
+                setUser,
+                logout: handleLogout,
+            }}
         >
             {children}
         </AuthContext.Provider>
