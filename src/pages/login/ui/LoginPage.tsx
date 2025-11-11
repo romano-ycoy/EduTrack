@@ -134,7 +134,7 @@ export const LoginPage = () => {
                     </FormControl>
                     <div className="space-y-1 leading-none">
                       <FormLabel className="font-normal cursor-pointer">
-                        Remember me (7 days)
+                        Remember me
                       </FormLabel>
                     </div>
                   </FormItem>
