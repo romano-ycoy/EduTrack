@@ -24,10 +24,27 @@ export interface AuthState {
 }
 
 // Zod schemas
+//Login
 export const loginSchema = z.object({
     email: z.string()
         .min(1, "Email is required")
         .email("Please enter a valid email address"),
+
+    password: z.string()
+        .min(1, "Password is required"),
+
+    rememberMe: z.boolean().optional(),
+});
+
+// Infer TypeScript type from Zod schema
+// Automatically creates a TypeScript type from zod schema
+export type LoginFormData = z.infer<typeof loginSchema>;
+
+//Register
+export const registerSchema = z.object({
+    email: z.string()
+        .min(1, 'Email is required')
+        .email("Invalif email address"),
 
     password: z.string()
         .min(8, "Password must be at least 8 characters")
@@ -36,9 +53,23 @@ export const loginSchema = z.object({
         .regex(/[0-9]/, "Password must contain at least one number")
         .regex(/[!@#$%^&*(),.?":{}|<>]/, "Password must contain at least one special character"),
 
-    rememberMe: z.boolean().optional(),
-});
+    confirmPassword: z.string()
+    .min(1, "Please confirm your password"),
 
-// Infer TypeScript type from Zod schema
-// Automatically creates a TypeScript type from zod schema
-export type LoginFormData = z.infer<typeof loginSchema>;
+    firstName: z.string()
+    .min(1, "First name is required")
+    .min(2, "First name must be at least 2 characters"),
+
+    lastName: z.string()
+    .min(1, "Last name is required")
+    .min(2, "Last name must be at least 2 characters"),
+})
+.refine(
+    (data) => data.password === data.confirmPassword,
+    {
+        message: "Password don't match",
+        path: ["confirmPassword"],
+    }
+)
+
+export type RegisterFormData = z.infer<typeof registerSchema>;
