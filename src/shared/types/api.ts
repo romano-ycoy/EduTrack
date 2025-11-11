@@ -13,7 +13,7 @@ export interface PaginationParams {
     limit?: number;
 }
 
-export interface PaginationResponse<T> {
+export interface PaginatedResponse<T> {
     total: number;
     page: number;
     totalPages: number;
